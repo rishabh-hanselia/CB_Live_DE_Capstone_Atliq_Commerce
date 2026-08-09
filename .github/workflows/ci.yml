@@ -1,14 +1,18 @@
-name: CI Data Pipeline & dbt Validation
+name: dbt-ci
 
 on:
-  push:
-    branches: [ main, master, dev ]
   pull_request:
+    branches: [ main, master ]
+  push:
     branches: [ main, master ]
 
 jobs:
-  validate-dbt:
+  build:
     runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     steps:
       - name: Check out repository code
@@ -20,33 +24,24 @@ jobs:
           python-version: '3.11'
 
       - name: Install dbt-databricks
-        run: |
-          python -m pip install --upgrade pip
-          pip install dbt-databricks
+        run: pip install dbt-databricks
 
-      - name: Configure profiles.yml from GitHub Secrets
-        env:
-          DB_HOST: ${{ secrets.DATABRICKS_HOST }}
-          DB_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
-          DB_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      - name: Generate CI profiles.yml
         run: |
           mkdir -p ~/.dbt
           echo "atliq_gold:
-            target: dev
+            target: ci
             outputs:
-              dev:
+              ci:
                 type: databricks
                 catalog: atliq
-                schema: gold
-                host: $DB_HOST
-                http_path: $DB_PATH
-                token: $DB_TOKEN" > ~/.dbt/profiles.yml
+                schema: ci
+                host: \"$DATABRICKS_HOST\"
+                http_path: \"$DATABRICKS_HTTP_PATH\"
+                token: \"$DATABRICKS_TOKEN\"
+                threads: 4" > ~/.dbt/profiles.yml
 
-      - name: Install dbt dependencies
+      - name: Install dependencies & Build dbt models in CI schema
         run: |
           dbt deps
-
-      - name: Parse and Compile dbt Project
-        run: |
-          dbt parse
-          dbt compile
+          dbt build --target ci
