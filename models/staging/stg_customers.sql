@@ -1,6 +1,6 @@
 SELECT 
     customer_id,
-    name,
+    customer_name AS name,
     email,
     city,
     signup_date
