@@ -24,7 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-databricks
 
-      - name: Create dummy profiles.yml for CI
+      - name: Configure profiles.yml from GitHub Secrets
+        env:
+          DB_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DB_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+          DB_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           mkdir -p ~/.dbt
           echo "atliq_gold:
@@ -34,9 +38,9 @@ jobs:
                 type: databricks
                 catalog: atliq
                 schema: gold
-                host: dummy.azuredatabricks.net
-                http_path: /sql/1.0/warehouses/dummy
-                token: dummy_token" > ~/.dbt/profiles.yml
+                host: $DB_HOST
+                http_path: $DB_PATH
+                token: $DB_TOKEN" > ~/.dbt/profiles.yml
 
       - name: Install dbt dependencies
         run: |
@@ -45,3 +49,4 @@ jobs:
       - name: Parse and Compile dbt Project
         run: |
           dbt parse
+          dbt compile
