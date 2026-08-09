@@ -35,4 +35,4 @@ models:
       +materialized: view
     gold:
       +materialized: table
-      +location_root: 'abfss://lakehouse@atliqcommercewarehouse.dfs.core.windows.net/{{ target.name }}'
+      +location_root: "abfss://lakehouse@atliqcommercewarehouse.dfs.core.windows.net/{% if target.name == 'ci' %}ci{% else %}gold{% endif %}"
