@@ -91,8 +91,11 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 │   └── dbt_project.yml              # Project configuration (dynamic target locations)
 │
 ├── 05_bi_fabric/                    # M6: Reporting and dashboards (Directory prepared for Fabric deliverables)
+│   ├── Fabric_App/                  # The fabric app resides here
 │   ├── Atliq Commerce.pbix          # Power BI Dashboard file
 │   ├── Atliq_Commerce_Dashboard.png # Dashboard screenshot
+│   ├── Fabric_App_screenshot.png    # Fabric app screenshot
+│   ├── Fabric_App_video.mp4         # Fabric app video showcase
 │   ├── Lakehouse_Fabric.png         # Fabric Lakehouse view screenshot
 │   └── Semantic_Model.png           # Semantic model relationships screenshot
 │
@@ -154,5 +157,18 @@ The Microsoft Fabric / Power BI dashboard leverages a **OneLake shortcut** in a 
 *   **ADF Ingestion Pipeline**: Exported JSON definition at [`02_ingestion_adf/pipelines/pl_atliq_master_ingestion.json`](02_ingestion_adf/pipelines/pl_atliq_master_ingestion.json).
 *   **Databricks Silver & Gold Transformations**: PySpark merge notebook in [`03_silver_databricks/`](03_silver_databricks/) and dbt project with tests in [`04_gold_dbt/`](04_gold_dbt/).
 *   **Nightly Trigger Schedule**: Screenshot of ADF schedule at [`02_ingestion_adf/triggers/trig_nightly_schedule.png`](02_ingestion_adf/triggers/trig_nightly_schedule.png).
-*   **Fabric Dashboard**: Power BI file and screenshots located in [`05_bi_fabric/`](05_bi_fabric/).
+*   **Fabric Dashboard & App**: Power BI file, screenshots, and the Fabric app folder (`Fabric_App/`) located in [`05_bi_fabric/`](05_bi_fabric/).
 *   **Architecture & Sync Write-Up**: Detailed explanation available at [`docs/architecture_writeup.md`](docs/architecture_writeup.md).
+
+---
+
+## 📺 Output Showcase
+
+### Power BI Dashboard Report
+![Atliq Commerce Dashboard](05_bi_fabric/Atliq_Commerce_Dashboard.png)
+
+### Fabric App Interface
+![Fabric App Screenshot](05_bi_fabric/Fabric_App_screenshot.png)
+
+### Fabric App Showcase (Video)
+[View Fabric App Video](05_bi_fabric/Fabric_App_video.mp4)

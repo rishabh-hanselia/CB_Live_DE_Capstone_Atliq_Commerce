@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "mark": {
+    "type": "bar",
+    "color": "var(--color-top-products)"
+  },
+  "encoding": {
+    "y": {
+      "field": "dim_productproduct_name",
+      "type": "nominal",
+      "sort": "-x"
+    },
+    "x": {
+      "field": "Gross Revenue",
+      "type": "quantitative",
+      "axis": {
+        "labels": false,
+        "domain": false,
+        "ticks": false,
+        "grid": false,
+        "title": null
+      }
+    }
+  }
+}

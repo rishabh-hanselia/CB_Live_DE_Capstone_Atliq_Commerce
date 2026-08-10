@@ -1,0 +1,22 @@
+id: cb-live-de-capstone-atliq-commerce
+name: CB_Live_DE_Capstone_Atliq_Commerce
+version: 1.0.0
+services:
+  auth:
+    enabled: true
+    fabric:
+      enabled: true
+    allowedRedirectUris:
+      - http://localhost:5173
+      - https://savvy-dune-d4d36e7f74-centralindia.webapp.fabricapps.net
+  data:
+    enabled: false
+  storage:
+    enabled: false
+  staticHosting:
+    enabled: true
+    folder: dist
+    buildCommand: npm run build:fabric
+    indexDocument: index.html
+  functions:
+    enabled: false

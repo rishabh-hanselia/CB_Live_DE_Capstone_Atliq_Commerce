@@ -1,0 +1,18 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "dim_dateyear_month",
+      "type": "temporal"
+    },
+    "y": {
+      "field": "dim_customersignup_cohort",
+      "type": "temporal"
+    },
+    "color": {
+      "field": "Total Customers",
+      "type": "quantitative"
+    }
+  }
+}

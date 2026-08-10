@@ -1,0 +1,22 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "mark": {
+    "type": "line",
+    "interpolate": "monotone",
+    "color": "var(--color-trend)"
+  },
+  "encoding": {
+    "x": {
+      "field": "dim_dateyear_month",
+      "type": "temporal",
+      "title": "Month"
+    },
+    "y": {
+      "field": "Gross Revenue",
+      "type": "quantitative",
+      "axis": {
+        "gridOpacity": 0.2
+      }
+    }
+  }
+}

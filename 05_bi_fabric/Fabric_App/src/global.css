@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Bridged tokens — kept in @theme static so the CSS vars are always
+   emitted, not tree-shaken when no Tailwind utility consumes them.
+   Required because <VegaVisual> and <DataGrid> read these at runtime via
+   useCssTheme() and project them into a JS theme object (Vega's SVG output
+   cannot resolve var() references). */
+@theme static {
+  --color-brand:            #A8DADC;
+  --color-brand-foreground: #1c1c1c;  
+  --color-hover:            #3f3f46;  
+}
+
+@theme {
+  /* Color tokens — light theme */
+  --color-background: #ffffff;
+  --color-foreground: #1c1c1c;
+  
+  --color-kpi: #A8DADC;
+  --color-kpi-foreground: #1c1c1c;
+  --color-trend: #FFC1CC;
+  --color-top-products: #B39CD0;
+  --color-city-revenue: #F5E8D8;
+
+  --color-card: #f4f4f5;
+  --color-card-foreground: #1c1c1c;
+
+  --color-popover: #f4f4f5;
+  --color-popover-foreground: #1c1c1c;
+
+  --color-primary: #A8DADC;
+  --color-primary-foreground: #1c1c1c;
+
+  --color-secondary: #FFC1CC;
+  --color-secondary-foreground: #1c1c1c;
+
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+
+  --color-accent: #B39CD0;
+  --color-accent-foreground: #1c1c1c;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: transparent;
+  --color-input: transparent;
+  --color-ring: #A8DADC;
+
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-4xl: 40px;
+  --radius-5xl: 48px;
+  --radius-6xl: 56px;
+  --radius-full: 9999px;
+  --radius: 12px;
+
+  /* Spacing — 4px grid; use only these tokens, no interpolation. *-nudge = base − 2px.
+     Usage: p-*, m-*, gap-* (e.g. p-400 gap-300) */
+  --spacing-none: 0;
+  --spacing-100-nudge: 2px;
+  --spacing-100: 4px;
+  --spacing-200-nudge: 6px;
+  --spacing-200: 8px;
+  --spacing-300-nudge: 10px;
+  --spacing-300: 12px;
+  --spacing-400: 16px;
+  --spacing-500: 20px;
+  --spacing-600: 24px;
+  --spacing-700: 28px;
+  --spacing-800: 32px;
+
+  /* Font Sizes — 100-based scale 
+     Usage: text-* (e.g. text-300, text-hero-900) */
+  --text-100: 10px;
+  --text-200: 12px;
+  --text-300: 14px;
+  --text-400: 16px;
+  --text-500: 20px;
+  --text-600: 24px;
+  --text-hero-700: 28px;
+  --text-hero-800: 32px;
+  --text-hero-900: 40px;
+  --text-hero-1000: 68px;
+
+  /* Line Heights — paired with font sizes
+     Usage: leading-* (e.g. leading-300) */
+  --leading-100: 14px;
+  --leading-200: 16px;
+  --leading-300: 20px;
+  --leading-400: 22px;
+  --leading-500: 28px;
+  --leading-600: 32px;
+  --leading-hero-700: 36px;
+  --leading-hero-800: 40px;
+  --leading-hero-900: 52px;
+  --leading-hero-1000: 92px;
+
+  /* Font Weights
+     Usage: font-* (e.g. font-semibold) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Families */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-monospace: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --font-numeric: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Icon Sizes — 100-based scale
+     Usage: icon-size-* custom utility (e.g. icon-size-200) */
+  --icon-size-100: 12px;
+  --icon-size-200: 16px;
+  --icon-size-300: 20px;
+  --icon-size-400: 24px;
+  --icon-size-500: 28px;
+  --icon-size-600: 32px;
+  --icon-size-700: 48px;
+}
+
+@utility icon-size-* {
+  width: --value(--icon-size-*);
+  height: --value(--icon-size-*);
+}
+
+@layer base {
+  .dark {
+    /* Color tokens - dark mode palette (soft black base) */
+    --color-background: #1C1C1C;
+    --color-foreground: #F5E8D8;
+    
+    --color-kpi: #F5E8D8;
+    --color-kpi-foreground: #1C1C1C;
+    --color-trend: #FF6F61;
+    --color-top-products: #DAA520;
+    --color-city-revenue: #FF4500;
+
+    --color-card: #262626;
+    --color-card-foreground: #F5E8D8;
+
+    --color-popover: #262626;
+    --color-popover-foreground: #F5E8D8;
+
+    --color-primary: #FF6F61;
+    --color-primary-foreground: #1C1C1C;
+
+    --color-secondary: #DAA520;
+    --color-secondary-foreground: #1C1C1C;
+
+    --color-muted: #3f3f46;
+    --color-muted-foreground: #a1a1aa;
+
+    --color-accent: #3f3f46;
+    --color-accent-foreground: #F5E8D8;
+
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+
+    --color-border: #3f3f46;
+    --color-input: #3f3f46;
+    --color-ring: #FF6F61;
+
+    --color-brand: #FF6F61;
+    --color-brand-foreground: #1C1C1C;
+    --color-hover: #FF4500;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .mask-edges {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+  }
+  .hover-float {
+    transition: transform 0.3s ease;
+  }
+  .hover-float:hover {
+    animation: float 2s ease-in-out infinite;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Custom On-Load Animations for Vega SVG Graphics */
+.animate-chart-on-load .mark-line path {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: draw-line 1.0s ease-out forwards;
+    animation-delay: 1.5s; /* Wait for Z-axis fly-in */
+}
+
+/* Horizontal staggered scale for bars */
+.animate-chart-on-load .mark-rect path,
+.animate-chart-on-load .mark-rect rect {
+    transform-origin: left;
+    transform-box: fill-box;
+    transform: scaleX(0);
+    animation: scale-up-bar-horizontal 1.0s ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+/* Hide data labels initially, fade them in after drawing */
+.animate-chart-on-load .mark-text text {
+    opacity: 0;
+    animation: fade-in-delay 0.2s ease-out forwards;
+    animation-delay: 2.3s; /* Finish at 2.5s */
+}
+
+@keyframes draw-line {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes scale-up-bar-horizontal {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+}
+
+@keyframes fade-in-delay {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

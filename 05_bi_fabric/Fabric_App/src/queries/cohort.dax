@@ -1,0 +1,7 @@
+EVALUATE
+SUMMARIZECOLUMNS(
+  'dim_customer'[signup_cohort],
+  'dim_date'[year_month],
+  "Total Customers", [Total Customers]
+)
+ORDER BY 'dim_customer'[signup_cohort] ASC, 'dim_date'[year_month] ASC

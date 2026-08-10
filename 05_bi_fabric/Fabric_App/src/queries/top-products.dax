@@ -1,0 +1,10 @@
+EVALUATE
+TOPN(
+  5,
+  SUMMARIZECOLUMNS(
+    'dim_product'[product_name],
+    "Gross Revenue", [Gross Revenue]
+  ),
+  [Gross Revenue], DESC
+)
+ORDER BY [Gross Revenue] DESC

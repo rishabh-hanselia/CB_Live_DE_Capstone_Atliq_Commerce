@@ -1,0 +1,6 @@
+EVALUATE
+SUMMARIZECOLUMNS(
+  'dim_customer'[city],
+  "Gross Revenue", [Gross Revenue]
+)
+ORDER BY [Gross Revenue] DESC

@@ -1,0 +1,7 @@
+activeProfile: default
+profiles:
+  default:
+    semanticModels:
+      atliq_commerce:
+        workspaceId: 6abe2613-860f-4a2d-a861-ece2b9401b3a
+        itemId: c9bc4ee1-1b6c-4eea-ae27-398c4a671ec6

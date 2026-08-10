@@ -1,0 +1,9 @@
+EVALUATE
+ROW(
+  "Total Customers", [Total Customers],
+  "Returning Customers", [Returning Customers],
+  "Gross Revenue", [Gross Revenue],
+  "New Customers", [New Customers],
+  "Returning Customer %", [Returning Customer %],
+  "Top 5 Products Revenue", [Top 5 Products Revenue]
+)

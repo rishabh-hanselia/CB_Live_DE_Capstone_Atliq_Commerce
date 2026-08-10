@@ -1,0 +1,7 @@
+EVALUATE
+SUMMARIZECOLUMNS(
+  'dim_product'[category],
+  'dim_product'[product_name],
+  "Gross Revenue", [Gross Revenue]
+)
+ORDER BY 'dim_product'[category] ASC, [Gross Revenue] DESC
