@@ -95,7 +95,7 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 │   ├── Atliq Commerce.pbix          # Power BI Dashboard file
 │   ├── Atliq_Commerce_Dashboard.png # Dashboard screenshot
 │   ├── Fabric_App_screenshot.png    # Fabric app screenshot
-│   ├── Fabric_App_video.mp4         # Fabric app video showcase
+│   ├── Fabric_App_video.gif         # Fabric app video showcase
 │   ├── Lakehouse_Fabric.png         # Fabric Lakehouse view screenshot
 │   └── Semantic_Model.png           # Semantic model relationships screenshot
 │
@@ -171,4 +171,4 @@ The Microsoft Fabric / Power BI dashboard leverages a **OneLake shortcut** in a 
 ![Fabric App Screenshot](05_bi_fabric/Fabric_App_screenshot.png)
 
 ### Fabric App Showcase (Video)
-[View Fabric App Video](05_bi_fabric/Fabric_App_video.mp4)
+![Fabric App Video](05_bi_fabric/Fabric_App_video.gif)
