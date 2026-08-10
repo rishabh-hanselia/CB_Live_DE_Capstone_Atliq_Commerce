@@ -65,9 +65,14 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 │   ├── oltp_schema/
 │   │   └── schema_ddl.sql           # Azure SQL DDL for source tables
 │   └── seed_data/                   
-│       ├── insert_*.sql             # Initial baseline data seed files
+│       ├── insert_customers.sql     # Baseline data seed file
+│       ├── insert_order_items.sql   # Baseline data seed file
+│       ├── insert_orders.sql        # Baseline data seed file
+│       ├── insert_payments.sql      # Baseline data seed file
+│       ├── insert_products.sql      # Baseline data seed file
 │       ├── load_csvs.py             # Script to load initial CSV files
-│       └── *.csv                    # Seed CSV datasets
+│       ├── marketing_spend.csv      # Seed CSV dataset
+│       └── supplier_price_list.csv  # Seed CSV dataset
 │
 ├── 02_ingestion_adf/                # M2 & M5: Metadata-driven ADF orchestration
 │   ├── pipelines/
@@ -84,9 +89,15 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 │   └── dbt_project.yml              # Project configuration (dynamic target locations)
 │
 ├── 05_bi_fabric/                    # M6: Reporting and dashboards (Directory prepared for Fabric deliverables)
+│   ├── Atliq Commerce.pbix          # Power BI Dashboard file
+│   ├── Atliq_Commerce_Dashboard.png # Dashboard screenshot
+│   ├── Lakehouse_Fabric.png         # Fabric Lakehouse view screenshot
+│   └── Semantic_Model.png           # Semantic model relationships screenshot
 │
 ├── docs/                            # Documentation deliverables
-│   └── architecture_writeup.md      # Detailed write-up on OLTP vs OLAP & sync mechanism
+│   ├── architecture_writeup.md      # Detailed write-up on OLTP vs OLAP & sync mechanism
+│   ├── first_pipeline _run_output.png  # Initial pipeline run output screenshot
+│   └── second_pipeline _run_output.png # Incremental pipeline run output screenshot
 │
 ├── .gitignore                       # Python, VS Code, and dbt ignores
 └── README.md                        # Platform documentation
@@ -124,57 +135,21 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 
 ---
 
-## 🚀 Setup & Execution Guide
-
-### Prerequisites
-*   Python 3.11.x installed locally.
-*   Azure Subscription with access to Azure SQL, ADF, ADLS Gen2, and Databricks Unity Catalog.
-*   Databricks Personal Access Token (PAT) and Serverless SQL Warehouse.
-
-### Local Development Setup
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/rishabh-hanselia/CB_live_DE_Capstone_atliq_gold.git
-    cd CB_live_DE_Capstone_atliq_gold
-    ```
-
-2.  **Set up Virtual Environment:**
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows: .venv\Scripts\Activate.ps1
-    pip install --upgrade pip
-    pip install dbt-databricks
-    ```
-
-3.  **Configure Environment Variables:**
-    Set your Databricks connection environment variables locally:
-    ```bash
-    export DATABRICKS_HOST="https://adb-xxxxxxx.azuredatabricks.net"
-    export DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/xxxxxx"
-    export DATABRICKS_TOKEN="dapixxxxxxx"
-    ```
-
-4.  **Execute dbt Models:**
-    ```bash
-    cd 04_gold_dbt
-    dbt deps
-    dbt build --target dev
-    ```
-
----
-
 ## 📊 Analytics & Reporting
 
-The Microsoft Fabric / Power BI dashboard connects to `atliq.gold` in DirectQuery mode via Databricks SQL Warehouse to answer key executive questions:
-*   **Gross Revenue & Net Margin Analysis**: Total sales revenue vs. cost margins calculated across product lines.
-*   **Regional Performance**: Top-performing sales regions and fulfillment channels.
-*   **Product Slicing**: Product category revenue distribution and pricing variance tracking against supplier price lists.
-*   **Time-Series Sales Trends**: Daily, monthly, and quarterly revenue trajectories powered by `dim_date`.
+The Microsoft Fabric / Power BI dashboard leverages a **OneLake shortcut** in a Fabric Lakehouse pointing directly to the ADLS Gen2 path where the Gold layer (`atliq.gold`) is stored as external Delta tables (zero data copy). It answers key executive questions:
+*   **Revenue Trend**: `gross_revenue` tracked by month and quarter (via `dim_date`).
+*   **Top Products**: `gross_revenue` sliced by product and category (via `dim_product`).
+*   **Top Cities**: `gross_revenue` distributed by customer city (via `dim_customer`).
+*   **New vs Returning Customers**: Analyzes customers by signup cohort vs. order month.
 
 ---
 
 ## 📄 Documentation Deliverables
 
-*   **Architecture & Sync Write-Up**: [`docs/architecture_writeup.md`](docs/architecture_writeup.md)
-*   **ADF Nightly Trigger Schedule**: [`02_ingestion_adf/triggers/trig_nightly_schedule.png`](02_ingestion_adf/triggers/trig_nightly_schedule.png)
+*   **OLTP Source & Simulator**: Found in [`01_source_oltp/`](01_source_oltp/), including schema, seed data, control table, and Python simulator.
+*   **ADF Ingestion Pipeline**: Exported JSON definition at [`02_ingestion_adf/pipelines/pl_atliq_master_ingestion.json`](02_ingestion_adf/pipelines/pl_atliq_master_ingestion.json).
+*   **Databricks Silver & Gold Transformations**: PySpark merge notebook in [`03_silver_databricks/`](03_silver_databricks/) and dbt project with tests in [`04_gold_dbt/`](04_gold_dbt/).
+*   **Nightly Trigger Schedule**: Screenshot of ADF schedule at [`02_ingestion_adf/triggers/trig_nightly_schedule.png`](02_ingestion_adf/triggers/trig_nightly_schedule.png).
+*   **Fabric Dashboard**: Power BI file and screenshots located in [`05_bi_fabric/`](05_bi_fabric/).
+*   **Architecture & Sync Write-Up**: Detailed explanation available at [`docs/architecture_writeup.md`](docs/architecture_writeup.md).
