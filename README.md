@@ -12,6 +12,8 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 
 ## 🏗️ End-to-End Architecture
 
+![End-to-End Architecture](docs/atliq_commerce_architecture.svg)
+
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                     OPERATIONAL LAYER (OLTP)                                           │
@@ -96,6 +98,7 @@ An enterprise-grade, metadata-driven analytical data platform built for **AtliQ 
 │
 ├── docs/                            # Documentation deliverables
 │   ├── architecture_writeup.md      # Detailed write-up on OLTP vs OLAP & sync mechanism
+│   ├── atliq_commerce_architecture.svg # End-to-End Architecture Diagram
 │   ├── first_pipeline _run_output.png  # Initial pipeline run output screenshot
 │   └── second_pipeline _run_output.png # Incremental pipeline run output screenshot
 │
